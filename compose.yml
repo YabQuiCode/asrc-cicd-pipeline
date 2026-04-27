@@ -1,0 +1,33 @@
+# Orchestration légère — Projet CI/CD EC06
+# Ce fichier décrit deux services :
+#   - web    : le site statique Nginx (image construite localement)
+#   - tester : un conteneur curl éphémère qui valide le bon fonctionnement du site
+#
+# Simulation de scaling : docker compose up -d --scale web=2
+
+services:
+  web:
+    build: .
+    image: projet-cicd-nginx:local
+    expose:
+      - "80"
+    networks:
+      - cicd_net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://127.0.0.1/"]
+      interval: 15s
+      timeout: 3s
+      retries: 3
+
+  tester:
+    image: curlimages/curl:8.12.1
+    depends_on:
+      - web
+    command: ["sh", "-c", "sleep 3 && curl -fsS http://web/ && echo '--- version.json ---' && curl -fsS http://web/version.json"]
+    networks:
+      - cicd_net
+
+networks:
+  cicd_net:
+    driver: bridge

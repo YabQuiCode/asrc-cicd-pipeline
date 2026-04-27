@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catal-Log — Projet CICD</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    main {
+      max-width: 720px;
+      width: 90%;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 40px 36px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(56,189,248,0.15);
+      border: 1px solid rgba(56,189,248,0.3);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #38bdf8;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .step {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 16px 14px;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .step:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56,189,248,0.3);
+    }
+    .step-icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .step-label { font-size: 0.82rem; font-weight: 600; color: #cbd5e1; }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .info-item {
+      background: rgba(255,255,255,0.04);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+    .info-label { font-size: 0.72rem; text-transform: uppercase; color: #64748b; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .info-value { font-size: 0.9rem; color: #e2e8f0; font-weight: 500; }
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #475569;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    footer a { color: #38bdf8; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <main>
+    <span class="badge">EC06 — ASRC</span>
+    <h1>Catal-Log</h1>
+    <p class="subtitle">Site statique servi par Nginx dans une image Docker construite, testée, publiée et promue automatiquement via GitHub Actions.</p>
+
+    <div class="pipeline">
+      <div class="step">
+        <div class="step-icon">&#128230;</div>
+        <div class="step-label">Build Docker</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">&#9989;</div>
+        <div class="step-label">Tests HTTP</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">&#128225;</div>
+        <div class="step-label">Publish GHCR</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">&#128640;</div>
+        <div class="step-label">Promotion</div>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <div class="info-label">Auteur</div>
+        <div class="info-value">Yoann</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Version</div>
+        <div class="info-value">1.0.0</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Registre</div>
+        <div class="info-value">GHCR</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Base image</div>
+        <div class="info-value">nginx:1.27-alpine</div>
+      </div>
+    </div>
+
+    <footer>Projet CICD &mdash; <a href="https://github.com/YabQuiCode/asrc-cicd-pipeline">YabQuiCode/asrc-cicd-pipeline</a></footer>
+  </main>
+</body>
+</html>
